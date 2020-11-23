@@ -1,0 +1,9 @@
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Certificate"})
+---
+apiVersion: cert-manager.io/v1alpha2
+
+#@overlay/match by=overlay.subset({"kind":"Issuer"})
+---
+apiVersion: cert-manager.io/v1alpha2

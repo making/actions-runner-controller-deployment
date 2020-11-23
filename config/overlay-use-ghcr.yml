@@ -1,0 +1,17 @@
+#@ load("@ytt:overlay", "overlay")
+
+#@overlay/match by=overlay.subset({"kind":"Deployment", "metadata": {"name": "controller-manager"}})
+---
+spec:
+  template:
+    spec:
+      containers:
+      #@overlay/match by="name"
+      - name: manager
+        #@overlay/replace via=lambda a,_: a.replace('summerwind', 'ghcr.io/making')
+        image: 
+        args:
+        #@overlay/append
+        - --runner-image=ghcr.io/making/actions-runner
+        #@overlay/append
+        - --docker-image=ghcr.io/making/docker:dind
